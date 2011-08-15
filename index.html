@@ -1,0 +1,46 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+        <link rel="stylesheet" href="assets/css/stylesPublic.css" type="text/css" media="screen" />
+        <script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script type="text/javascript">
+            var watchID = null;
+            
+            document.addEventListener("deviceready", onDeviceReady, false);
+            
+            function onDeviceReady() {
+                startWatch();
+            }
+            
+            function startWatch() {
+                var options = {frequency: 3000};
+                watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+            }
+            
+            function onSuccess(heading) {
+                var element = document.getElementById('heading');
+                element.innerHTML = heading;
+            }
+            
+            function onError() {
+                var element = document.getElementById('heading');
+                element.innerHTML = 'Error';
+            }
+        </script>
+    </head>
+    <body>
+        <div id="title_bar">Compass Test</div>
+        
+        <div id="main" class="view">
+            <div class="headingDisplay"><a class="fontMain" id="heading"></a></div>
+        </div>
+    </body>
+</html>
